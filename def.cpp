@@ -208,22 +208,6 @@ void leerProgreso() {
     }
     archivo.close();
 }
-char universos[3][3];
 
-void inicializarUniversos() {
-    for(int i = 0; i < 3; i++)
-        for(int j = 0; j < 3; j++)
-            universos[i][j] = '-';
-}
-
-void marcarVisitado(int f, int c) {
-    universos[f][c] = 'V';
-}
-
-void mostrarUniversos() {
-    for(int i = 0; i < 3; i++) {
-        for(int j = 0; j < 3; j++)
-            cout << universos[i][j] << " ";
-        cout << endl;
-    }
+    
 }                                                                       
