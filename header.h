@@ -48,9 +48,7 @@ void introduccionJuego();
 void guardarProgreso(string nombre, string aventuras, string premios);
 void leerProgreso();
 //funcion para usar matrices mostrando los universos a los que ha ido
-void inicializarUniversos();
-void marcarVisitado(int f, int c);
-void mostrarUniversos();
+
 
 // Declaración de aventuras
 extern Aventura nerysia;
