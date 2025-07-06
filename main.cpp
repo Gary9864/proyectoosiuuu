@@ -3,7 +3,7 @@
 #include "src/def.cpp"
 using namespace std;
 
-int main() {
+int main() { 
    
 
     int opcion;
