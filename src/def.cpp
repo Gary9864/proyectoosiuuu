@@ -383,7 +383,7 @@ ConfigMinijuegos obtenerConfigThornia() {
 }
 
 //jugar nivel de aventura
-void jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNivel) {
+bool jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNivel) {
     cout << "\nSituacion: " << nivel.situacion << "\n";
     for (int i = 0; i < 3; i++) { //si los niveles son menores a 3
         cout << i + 1 << ". " << nivel.decisiones[i].texto << "\n"; //manda el arreglo de decisiones
@@ -412,8 +412,12 @@ void jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNi
                 default: break; // ningún minijuego
             }
         }
+                return true;  // ✅ Pasó el nivel
+
     } else {
-        cout << "Sobreviviste, pero sin premio.\n";
+        cout << "Opción incorrecta. ¡Debes intentarlo de nuevo!\n";
+                return false; // ❌ Repetir nivel
+
     }
 }
 //funcion de jugar aventura 
@@ -421,8 +425,12 @@ void jugarAventura(const Aventura& aventura, const ConfigMinijuegos& config) {
     cout << "\n--- Bienvenido a " << aventura.nombre << " ---\n";
     for (int i = 0; i < 5; i++) { //recorremos el arreglo de la funcion 
         cout << "\n--- Nivel " << i + 1 << " ---";
+        bool pasoNivel = false;
+        do {
+            pasoNivel = jugarNivel(aventura.niveles[i], config, i);
+        } while (!pasoNivel); // 🔁 Repite hasta que el jugador acierte
        // jugarNivel(aventura.niveles[i]);
-       jugarNivel(aventura.niveles[i], config, i); // ✅ Pasas config y el índice actual
+      // jugarNivel(aventura.niveles[i], config, i); // ✅ Pasas config y el índice actual
 
       
     }
