@@ -43,7 +43,8 @@ void agregarPremio(string premio);
 //funcion mostrar premios
 void mostrarPremios();
 //funcion jugar nivel
-void jugarNivel(const Nivel& nivel);
+bool jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNivel);
+//void jugarNivel(const Nivel& nivel);
 //funcion jugar aventura
 void jugarAventura(const Aventura& aventura, const ConfigMinijuegos& config);
 //funcion intentar jugar aventura para validar las veces que ha jugado una aventura
