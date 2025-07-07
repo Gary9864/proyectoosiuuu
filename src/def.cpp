@@ -1,6 +1,7 @@
 #include "header.h"
 #include <iostream>
 #include <fstream>
+#include <conio.h>
 
 // Variables globales
 bool aventurasJugadas[3] = {false, false, false};
@@ -360,6 +361,45 @@ void minijuegoContar() {
 
     cout << "Minijuego terminado.\n";
 }
+string minijuegoDueloSimple() {
+    int aciertos = 0;
+    int fallos = 0;
+    char runa;
+    char tecla;
+
+    cout << "\n--- Minijuego: Duelo de Runas (Simple) ---\n";
+    cout << "Instrucciones: aparecerá una letra (A, S o D) y debes presionar esa misma tecla.\n";
+    cout << "3 aciertos = victoria, 2 fallos = derrota.\n";
+
+    while (aciertos < 3 && fallos < 2) {
+        // Mostramos manualmente una runa
+        cout << "\nElige la runa (A, S o D): ";
+        cin >> runa;
+
+        cout << "Presiona la tecla correcta: ";
+        tecla = _getch(); // El jugador presiona una tecla
+
+        cout << "\nTú presionaste: " << tecla << endl;
+
+        if (tecla == runa) {
+            cout << "¡Correcto! Bloqueaste la runa.\n";
+            aciertos++;
+        } else {
+            cout << "¡Fallaste! El ataque te daña.\n";
+            fallos++;
+        }
+
+        cout << "Aciertos: " << aciertos << " | Fallos: " << fallos << "\n";
+    }
+
+    if (aciertos == 3) {
+        cout << "\nHas vencido al Guardián del Olvido.\n";
+        return "Cristal del Olvido";
+    } else {
+        cout << "\nHas sido derrotado. El poder del Olvido te consume.\n";
+        return "";
+}
+}
 // Configuraciones de minijuegos para cada aventura
 ConfigMinijuegos obtenerConfigNerysia() {
     return ConfigMinijuegos{
@@ -377,8 +417,8 @@ ConfigMinijuegos obtenerConfigInfernum() {
 
 ConfigMinijuegos obtenerConfigThornia() {
     return ConfigMinijuegos{
-        {false, false, false, false, false},
-        {0, 0, 0, 0, 0}
+        {false, false, false, false, true},
+        {0, 0, 0, 0, 5}
     };
 }
 
@@ -409,6 +449,7 @@ bool jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNi
                 case 2: minijuegoSimon(); break;
                 case 3: minijuegoContar(); break;
                 case 4: minijuegoMemoria(); break;
+                case 5: minijuegoDueloSimple(); break;
                 default: break; // ningún minijuego
             }
         }
