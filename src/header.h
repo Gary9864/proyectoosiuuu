@@ -66,7 +66,8 @@ void minijuegoTesoro();
 void minijuegoSimon();
 void minijuegoContar();
 string minijuegoDuelo();
-
+void minijuegoPesca();
+void minijuegoObjetosPerdidos();
 
 
 // Declaración de aventuras
