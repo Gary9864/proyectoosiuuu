@@ -17,8 +17,8 @@ Aventura nerysia = {
     "Nerysia (Water World)",
     
 {
-        // Level 1 – Coral Reef
-        { "The pufferfish have found their home destroyed. They are furious and are attacking the octopus village.\nWhat weapon do you recommend using?",
+        // 
+        { "Level 1 Coral Reef: The pufferfish have found their home destroyed. They are furious and are attacking the octopus village.\nWhat weapon do you recommend using?",
           { 
               {"Their spines", "The fish get confused and stop attacking for a moment."},
               {"A sword", "The sword is useless underwater, you waste time."},
@@ -515,14 +515,29 @@ bool jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNi
     for (int i = 0; i < 3; i++) { //si los niveles son menores a 3
         cout << i + 1 << ". " << nivel.decisiones[i].texto << "\n"; //manda el arreglo de decisiones
     }
-
+    string entrada;
     int opcion;//declaramos un entero para la opcion de las decisiones
     do {
         cout << "Elige una opcion: ";
-        cin >> opcion;
-        if (opcion < 1 || opcion > 3) { //una condicional que elija solamente entre la opcion  1 a 3
-            cout << "Opcion invalida. Intenta de nuevo.\n";
+        cin >> entrada;
+         bool esNumero = true;
+        for (char c : entrada) {
+            if (c < '0' || c > '9') {
+                esNumero = false;
+                break;
+            }
         }
+if (!esNumero) {
+            cout << "Entrada invalida. Debes ingresar solo números.\n";
+            continue;
+        }
+
+        opcion = stoi(entrada);
+
+        if (opcion < 1 || opcion > 3) { //una condicional que elija solamente entre la opcion  1 a 3
+            cout << "Opcion fuera de rango. Intenta con 1, 2 o 3.\n";
+        }
+
     } while (opcion < 1 || opcion > 3); //todo eso lo hara mientras sean esas opciones
 
     cout << "\n" << nivel.decisiones[opcion - 1].consecuencia << "\n"; //mostramos el arreglo de opciones -1 y la consecuencia que es correspndiente
@@ -585,6 +600,16 @@ void intentarJugarAventura(const Aventura& aventura, int indiceAventura, const C
 }
 void introduccionJuego() {
     cout << "Antes de comenzar, dime tu nombre: ";
-    cin >> nombreJugador;
-    cout << "\nMuy bien, " << nombreJugador << ". Preparate para tu destino...\n";
+   do{
+     cin >> nombreJugador;
+     bool soloLetras = true;
+     for (char c : nombreJugador){
+        if (c >= '0' && c <= '9'){
+            soloLetras = false;
+            break;
+        }
+     }
+     if (soloLetras) break;
+     else cout << "El nombre no puede contener numeros. Intenta de nuevo: ";
+} while (true);
 }
