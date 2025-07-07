@@ -101,22 +101,28 @@ Aventura infernum = {
      }                  
 };
 
-Aventura thornia = {//declaramos el la aventura a la que vamos a añadirle datos
-    "thornia (El mundo olvidado)",//nombre de la aventura como en la estructura pide
+Aventura thornia = {// declare the adventure to which we are going to add data
+
+    "thornia (El mundo olvidado)",// name of the adventure as required by the structure
+
     {
-//situación 1 (nivel 1)
+// situation 1 (level 1)
+
         { "Despiertas en unas ruinas cubiertas de niebla y una estatua emite un sonido.", 
-//decisión y consecuencia
+// decision and consequence
+
           { {"Tocar la estatua", "Te paralisas unos segundos y pierdes tiempo."}, 
-//decisión y consecuencia
+
             {"Tocar simbolo en forma de triangulo en la pared", "Aparece portal de luz ante ti."}, 
-//decisión y consecuencia
+
             {"Caminar hacia la niebla", "Escuchas unos murmuros y te alejas."}
           },
-//premio obtenido y opcion que te da ese premio
+// prize obtained and the option that gives you that prize
+
           "Escudo abismal", 1 },
-//repetimos la estructura para los niveles siguientes
-//todo esto es un ejemplo
+// repeat the structure for the following levels
+
+
         { "Sales de la cueva por el portal y encuentras una torre que susurra tus pensamientos sin sesar. ",
           { {"Te quedas en silencio. ", "No logras soportar la voz de tus pensamientos y pierdes cordura. "},
             {"Subes a la cima de la torre. ", "No encuentras nada y regresas. "},
@@ -149,17 +155,21 @@ Aventura thornia = {//declaramos el la aventura a la que vamos a añadirle datos
 
 //add prize if won
 void agregarPremio(string premio) {
-    if (cantidadPremios < 20) {//si la cantidad es menor a 20 premios
-        premiosJugador[cantidadPremios++] = premio; //se guarda en el arreglo sumando los premios
+    if (cantidadPremios < 20) {// if the quantity is less than 20 rewards
+
+        premiosJugador[cantidadPremios++] = premio; // store it in the array adding to the rewards
+
     }
 }
 //display obtained prizes
 void mostrarPremios() {
     cout << "\n--- Premios obtenidos ---\n";
-    if (cantidadPremios == 0) {//si la cantidad de premios es igual a cero muestra el mensaje
+    if (cantidadPremios == 0) {// if the number of rewards is zero, show the message
+
         cout << "No tienes premios aún.\n";
     } else {
-        for (int i = 0; i < cantidadPremios; i++) { //si tiene premio entonces se recorre el arreglo y se muestran los premio ganados
+        for (int i = 0; i < cantidadPremios; i++) { // if there are rewards, then iterate through the array and show the rewards won
+
             cout << i + 1 << ". " << premiosJugador[i] << "\n";
         }
     }
@@ -255,7 +265,8 @@ string minijuegoDuelo() {
     cout << "Instrucciones: se mostrará una letra (A, S, D, F o J).\n";
     cout << "Presiona esa tecla. 4 aciertos = victoria, 2 fallos = reinicio.\n";
 
-    while (true) { // Repetir hasta que gane
+    while (true) { // Repeat until the player wins
+
         int aciertos = 0;
         int fallos = 0;
         posicion = 0;
@@ -266,7 +277,8 @@ string minijuegoDuelo() {
 
             cout << "\nRuna enemiga: " << runa << "\n";
             char tecla;
-             // VALIDACIÓN: repetir hasta que no meta un número
+             // // VALIDATION: repeat until a non-number is entered
+
             while (true) {
                 cout << "Presiona la tecla correcta: ";
                 tecla = _getch();
@@ -275,7 +287,8 @@ string minijuegoDuelo() {
                 if (tecla >= '0' && tecla <= '9') {
                     cout << "No puedes usar números. Intenta de nuevo.\n";
                 } else {
-                    break;  // Sale del while si no es número
+                    break;  // Exit the while loop if the input is not a number
+
                 }
             }
 
@@ -551,7 +564,8 @@ if (!esNumero) {
     cout << "\n" << nivel.decisiones[opcion - 1].consecuencia << "\n";
 
     if ((opcion - 1) == nivel.opcionGanadora) {
-        // Primero jugar minijuego si existe
+        // First play minigame if it exists
+
         if (config.activar[indiceNivel]) {
             switch (config.tipo[indiceNivel]) {
                 case 1: minijuegoTesoro(); break;
