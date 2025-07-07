@@ -520,8 +520,7 @@ void minijuegoPesca() {
     cout << "Minijuego terminado.\n";
 }
 
-#include <iostream>
-using namespace std;
+
 
 // Minijuego Nerysia para nivel 4
 void minijuegoObjetosPerdidos() {
@@ -555,6 +554,74 @@ void minijuegoObjetosPerdidos() {
     cout << "Minijuego terminado.\n";
 }
 
+void abrirCofre() {
+    const int clave[3] = {3, 1, 5}; // combinación secreta
+    int intento[3];
+    bool abierto = false;
+
+    cout << "====== DESAFÍO DEL COFRE SELLADO ======\n";
+    cout << "Encuentra la combinación secreta de 3 dígitos (0-9).\n";
+    cout << "Recibirás pistas después de cada intento.\n";
+    cout << "Buena suerte, valiente buscador de tesoros.\n\n";
+
+    while (!abierto) {
+        // --- Entrada del jugador ---
+        cout << "Introduce tu intento (3 números entre 0 y 9): ";
+        cin >> intento[0] >> intento[1] >> intento[2];
+
+        // Validación de entrada
+        while (intento[0] < 0 || intento[0] > 9 ||
+               intento[1] < 0 || intento[1] > 9 ||
+               intento[2] < 0 || intento[2] > 9) {
+            cout << "Error: Todos los números deben estar entre 0 y 9.\n";
+            cout << "Vuelve a intentarlo: ";
+            cin >> intento[0] >> intento[1] >> intento[2];
+        }
+
+        // --- Evaluación del intento ---
+        int correctos = 0;
+        int desordenados = 0;
+        bool usadoClave[3] = {false, false, false};
+        bool usadoIntento[3] = {false, false, false};
+
+        // Comparar en posición exacta
+        for (int i = 0; i < 3; i++) {
+            if (intento[i] == clave[i]) {
+                correctos++;
+                usadoClave[i] = true;
+                usadoIntento[i] = true;
+            }
+        }
+
+        // Comparar en posiciones diferentes
+        for (int i = 0; i < 3; i++) {
+            if (!usadoIntento[i]) {
+                for (int j = 0; j < 3; j++) {
+                    if (!usadoClave[j] && intento[i] == clave[j]) {
+                        desordenados++;
+                        usadoClave[j] = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // --- Resultado del intento ---
+        if (correctos == 3) {
+            cout << "\n¡Éxito! Has adivinado la combinación perfecta.\n";
+            cout << "✨ El cofre se abre y revela un brillo dorado lleno de riquezas. 💰\n";
+            abierto = true;
+        } else {
+            cout << "\nPistas del intento:\n";
+            cout << " - Números en posición correcta: " << correctos << "\n";
+            cout << " - Números correctos pero en otra posición: " << desordenados << "\n";
+            cout << "Sigue intentando...\n";
+        }
+
+        cout << "----------------------------------------\n";
+    }
+}
+
 
 // Configuraciones de minijuegos para cada aventura
 ConfigMinijuegos obtenerConfigNerysia() {
@@ -573,8 +640,8 @@ ConfigMinijuegos obtenerConfigInfernum() {
 
 ConfigMinijuegos obtenerConfigThornia() {
     return ConfigMinijuegos{
-        {false, false, false, false, true},
-        {0, 0, 0, 0, 5}
+        {false, true, false, false, true},
+        {0, 8, 0, 0, 5}
     };
 }
 
@@ -620,6 +687,7 @@ if (!esNumero) {
                 case 5: minijuegoDuelo(); break;
                 case 6: minijuegoPesca(); break;
                 case 7: minijuegoObjetosPerdidos(); break;
+                case 8: abrirCofre(); break;
                 default: break;
             }
         }
