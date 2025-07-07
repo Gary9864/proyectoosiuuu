@@ -67,7 +67,7 @@ Aventura thornia = {//declaramos el la aventura a la que vamos a añadirle datos
             {"Caminar hacia la niebla", "Escuchas unos murmuros y te alejas."}
           },
 //premio obtenido y opcion que te da ese premio
-          "Escudo abismal", 2 },
+          "Escudo abismal", 1 },
 //repetimos la estructura para los niveles siguientes
 //todo esto es un ejemplo
         { "Sales de la cueva por el portal y encuentras una torre que susurra tus pensamientos sin sesar. ",
@@ -75,25 +75,25 @@ Aventura thornia = {//declaramos el la aventura a la que vamos a añadirle datos
             {"Subes a la cima de la torre. ", "No encuentras nada y regresas. "},
             {"Investigas debajo de la torre acercandote a los susurros. ", "Encuentras entrada subterrania y un cofre. "}
           },
-          "Hacha en mal estado", 3 },
+          "Hacha en mal estado", 2 },
         { "Al descender encuentras una sala con 3 estatuas encapuchadas con diferentes simbolos.",
           { {"Tocar primer estatua con un simbolo cuadrado. ", "Activas una trampa y no escapaste a tiempo. "},
             {"Tocar segunda estatua con un simbolo circular. ", "Aparece una neblina y terminas inconciente. "},
             {"Tocar tercera estatua con simbolo triangular. ", "La estatua se desplaza y abre un camino atras de ella y te llevas su capucha. "}
           },
-          "Capucha vieja. ", 3 },
-        { "Sigues el camino y te encuentras una sala oscura llena de armas con escombros y puerta con simbolos en las paredes. ",
-          { {"Investiga los escombros. ", "Encuentras un libro en otro idioma. "},
-            {"Fuerzas la puerta con el escudo. ", "No logras nada. "},
-            {"Investigas los simbolos en las paredes. ", "Reaccionan con la capucha y se abre ante ti la puerta. "}
+          "Capucha vieja. ", 2 },
+        { "Sigues el camino y te encuentras una sala oscura llena de armas con escombros y simbolos en las paredes. ",
+          { {"Investiga los escombros. ", "Al acercarte a los escombros encuentras un libro y se activan las runas con la capucha apareciendo una puerta . "},
+            {"Vuelves a la sala anterior. ", "No logras nada. "},
+            {"Investiga las armas. ", "Te tropiezas y te atraviesa una espada de forma humillante. "}
           },
-          "Libro desconocido. ", 3 },
-        { "Continuara.",
-          { {"Pelea o algo", "sigilo."},
-            {"atributos", "ganas un arma ."},
-            {"Escapar con un artefacto robado", "Obtienes una maldicion."}
+          "Libro desconocido. ", 0 },
+        { "Tras cruzar la puerta, entras en una cámara iluminada por cristales flotantes. En el centro, el Guardián del Olvido despierta de su letargo. Solo una acción puede debilitarlo para tener oportunidad de vencerlo.",
+          { {"Atacar directamente con el hacha. ", "El guardián bloquea tu ataque y te lanza contra la pared, dejándote herido."},
+            {"Leer en voz alta la inscripción del libro desconocido. ", "La sala tiembla. El guardián parece debilitado y tambalea, pero sigue en pie."},
+            {"Cubrirte con la capucha vieja.", "La capucha se quema al contacto con la energía del guardián y quedas desprotegido."}
           },
-          "maldicion", 0 }// no le pongan atencion al ultimo lo puse por poner falta plantear
+          "", 1 }
 }
 };
 
