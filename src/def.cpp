@@ -14,10 +14,57 @@ string nombreJugador;
 //aventura uno
 
 Aventura nerysia = {
-    "Nerysia (Mundo de Agua)",
+    "Nerysia (Water World)",
     
-    
+{
+        // Level 1 – Coral Reef
+        { "The pufferfish have found their home destroyed. They are furious and are attacking the octopus village.\nWhat weapon do you recommend using?",
+          { 
+              {"Their spines", "The fish get confused and stop attacking for a moment."},
+              {"A sword", "The sword is useless underwater, you waste time."},
+              {"The octopus ink", "The ink blinds them and they manage to escape in time."}
+          },
+          "Ancient Ink", 1 },
+
+        // Level 2 – Eternal Algae Caves
+        { "As you move through a cave covered in glowing algae, you hear a hypnotic singing. You realize it comes from dark mermaids trying to distract you to steal your life energy.",
+          {
+              {"You follow the singing, maybe it leads to a clue", "You get hypnotized and lose energy."},
+              {"You cover your ears with algae", "You resist the song and move forward successfully."},
+              {"You throw a stone toward the sound to distract them", "You confuse them and manage to escape unseen."}
+          },
+          "Luminous Pearl", 2 },
+
+        // Level 3 – Abyssal Trench of Oblivion
+        { "You reach an area so deep that light disappears. You find an old fish trapped in a black coral cage begging for help.",
+          {
+              {"You free it without asking", "It was a trap, the fish betrays you."},
+              {"You ask questions before deciding", "The fish shows wisdom and gives you an ancient fragment."},
+              {"You ignore it and move on", "You feel guilty, but avoid trouble."}
+          },
+          "Ancient Coral Fragment", 2 },
+
+        // Level 4 – Fields of Wild Currents
+        { "A violent current pulls you, and you must choose which creature to ally with to help you swim safely.",
+          {
+              {"A giant squid", "It helps you, but demands a favor in return."},
+              {"A group of sea turtles", "They transport you calmly and safely."},
+              {"A very fast lone dolphin", "You arrive quickly but get separated from the group."}
+          },
+          "Current Amulet", 3 },
+
+        // Level 5 – The Palace of Corruption
+        { "You reach the heart of darkness: a gigantic creature made of oil and shadows is corrupting the water.\nHow do you decide to face it?",
+          {
+              {"You use a sacred pearl you found on the way", "The creature weakens and retreats."},
+              {"You summon all the creatures you helped before", "They fight with you and manage to contain it."},
+              {"You use your own life energy as a last resort", "The creature disappears, but you're left badly injured."}
+          },
+          "Heart of Nerysia", 1 }
+    }
+
 };
+// adventure two
 
 
 //aventura dos
@@ -400,11 +447,51 @@ string minijuegoDueloSimple() {
         return"";
 }
 }
+//juego8
+void minijuegoPesca() {
+    int x = rand() % 3;
+    int y = rand() % 3;
+    int intentoX, intentoY;
+
+    cout << "\n--- Minijuego: Pesca en Aguas Cristalinas ---\n";
+    cout << "Adivina en qué punto (x, y) está el pez (valores entre 0 y 2):\n";
+
+    cout << "Ingresa coordenada X: ";
+    cin >> intentoX;
+    cout << "Ingresa coordenada Y: ";
+    cin >> intentoY;
+
+    if (intentoX == x && intentoY == y) {
+        cout << "¡Pescaste al pez dorado!\n";
+    } else {
+        cout << "Nada aquí... El pez estaba en (" << x << ", " << y << ")\n";
+    }
+
+    cout << "Minijuego terminado.\n";
+}
+//juego 7 
+void minijuegoObjetosPerdidos() {
+    char objetos[5] = {'F', 'R', 'F', 'L', 'T'}; // 'F' se repite
+    char respuesta;
+
+    cout << "\n--- Minijuego: Objetos Perdidos ---\n";
+    cout << "Observa los objetos: ";
+    for (int i = 0; i < 5; i++) cout << objetos[i] << " ";
+    cout << "\nUno de ellos está repetido. ¿Cuál es? ";
+    cin >> respuesta;
+
+    if (respuesta == 'F' || respuesta == 'f')
+        cout << "¡Correcto! El objeto duplicado era F.\n";
+    else
+        cout << "Incorrecto. Era la letra F.\n";
+
+    cout << "Minijuego terminado.\n";
+}
 // Configuraciones de minijuegos para cada aventura
 ConfigMinijuegos obtenerConfigNerysia() {
     return ConfigMinijuegos{
-        {false, true, false, false, true}, // niveles con minijuego
-        {1, 0, 0, 0, 3}                   // tipo de minijuego: 1 = Tesoro, 3 = Contar
+        {true, false, true, false, true}, // niveles con minijuego
+        {6, 0, 7, 0, 3}                   // tipo de minijuego: 1 = Tesoro, 3 = Contar
     };
 }
 
@@ -450,14 +537,16 @@ bool jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNi
                 case 3: minijuegoContar(); break;
                 case 4: minijuegoMemoria(); break;
                 case 5: minijuegoDueloSimple(); break;
+                case 6: minijuegoPesca(); break;
+                case 7: minijuegoObjetosPerdidos(); break;
                 default: break; // ningún minijuego
             }
         }
-                return true;  // ✅ Pasó el nivel
+                return true;  //  Pasó el nivel
 
     } else {
         cout << "Opción incorrecta. ¡Debes intentarlo de nuevo!\n";
-                return false; // ❌ Repetir nivel
+                return false; //  Repetir nivel
 
     }
 }
@@ -465,13 +554,13 @@ bool jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNi
 void jugarAventura(const Aventura& aventura, const ConfigMinijuegos& config) {
     cout << "\n--- Bienvenido a " << aventura.nombre << " ---\n";
     for (int i = 0; i < 5; i++) { //recorremos el arreglo de la funcion 
-        cout << "\n--- Nivel " << i + 1 << " ---";
+       // cout << "\n--- Nivel " << i + 1 << " ---";
         bool pasoNivel = false;
         do {
             pasoNivel = jugarNivel(aventura.niveles[i], config, i);
-        } while (!pasoNivel); // 🔁 Repite hasta que el jugador acierte
+        } while (!pasoNivel); //  Repite hasta que el jugador acierte
        // jugarNivel(aventura.niveles[i]);
-      // jugarNivel(aventura.niveles[i], config, i); // ✅ Pasas config y el índice actual
+      // jugarNivel(aventura.niveles[i], config, i); //  Pasas config y el índice actual
 
       
     }
