@@ -249,8 +249,63 @@ void mostrarProgreso() {
 
 //minigame 2 
 
-//minigame 3
+//game 3  magma
+void minigameMagma() {
+    string options[3] = {"Rock", "Paper", "Magma"};
+    int guardianMoves[3] = {2, 0, 1}; // Magma, Rock, Paper
+    string input;
+    int player = -1, guardian;
+    int playerPoints = 0, guardianPoints = 0;
+    int round = 0;
 
+    cout << "You must defeat the stone guardian.\n";
+
+    while (playerPoints < 2) {
+        do {
+            cout << "\n0 = Rock | 1 = Paper | 2 = Magma\nYour choice: ";
+            cin >> input;
+
+            bool isValid = true;
+
+            if (input.length() != 1 || input[0] < '0' || input[0] > '9') {
+                isValid = false;
+            } else {
+                player = input[0] - '0';
+                if (player < 0 || player > 2) isValid = false;
+            }
+
+            if (!isValid) {
+                cout << "Invalid input. Enter 0, 1, or 2.\n";
+                continue;
+            } else {
+                break;
+            }
+
+        } while (true);
+
+        guardian = guardianMoves[round % 3]; // cicla entre 0, 1, 2
+        cout << "The guardian chose: " << options[guardian] << endl;
+
+        if (player == guardian) {
+            cout << "It's a tie.\n";
+        }
+        else if (
+            (player == 0 && guardian == 2) || // Rock beats Magma
+            (player == 2 && guardian == 1) || // Magma beats Paper
+            (player == 1 && guardian == 0)    // Paper beats Rock
+        ) {
+            cout << "You win this round.\n";
+            playerPoints++;
+        } else {
+            cout << "You lose this round.\n";
+            guardianPoints++;
+        }
+
+        round++;
+    }
+
+    cout << "\nYou won.\n";
+}
 
 
 //minigame 4
