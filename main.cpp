@@ -5,7 +5,7 @@ using namespace std;
 
 int main() { 
    
-
+    string entrada;
     int opcion;
     introduccionJuego();
 
@@ -17,8 +17,24 @@ int main() {
         cout << "4. Mostrar progreso\n";
         cout << "0. Salir\n";
         cout << "Opcion: ";
-        cin >> opcion;
+        cin >> entrada;
 
+ // Validar que la entrada tenga solo dígitos
+        bool esNumero = true;
+        for (char c : entrada) {
+            if (c < '0' || c > '9') {
+                esNumero = false;
+                break;
+            }
+        }
+
+        if (!esNumero) {
+            cout << "Entrada inválida. Debes escribir solo números.\n";
+            continue;
+        }
+
+        opcion = stoi(entrada); // Convertir solo si fue validado
+        
         switch (opcion) {
             case 1:
                 intentarJugarAventura(nerysia, 0, obtenerConfigNerysia());
