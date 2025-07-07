@@ -27,7 +27,7 @@ struct Aventura {
 // Configuración para minijuegos: activar y tipo por nivel (5 niveles)
 struct ConfigMinijuegos {
     bool activar[5];  // true si hay minijuego en ese nivel
-    int tipo[5];      // tipo de minijuego: 1=Memoria, 2=Tesoro, 3=Simon, 4=Contar
+    int tipo[7];      // tipo de minijuego: 1=Memoria, 2=Tesoro, 3=Simon, 4=Contar
 };
 
 // Variables globales
@@ -66,6 +66,8 @@ void minijuegoTesoro();
 void minijuegoSimon();
 void minijuegoContar();
 string minijuegoDuelo();
+
+
 
 // Declaración de aventuras
 extern Aventura nerysia;
