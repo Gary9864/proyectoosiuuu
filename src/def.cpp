@@ -396,7 +396,7 @@ string minijuegoDuelo() {
 
         if (aciertos == 4) {
             cout << "\n ¡Has ganado el duelo de runas!\n";
-            return "Amuleto de Precisión";
+            return "";
         } else {
             cout << "\n Has fallado... el duelo comienza de nuevo.\n";
         }
@@ -430,13 +430,26 @@ bool jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNi
     for (int i = 0; i < 3; i++) {
         cout << i + 1 << ". " << nivel.decisiones[i].texto << "\n";
     }
-
+ string entrada;
     int opcion;
     do {
         cout << "Elige una opcion: ";
-        cin >> opcion;
+        cin >> entrada;
+        bool esNumero = true;
+        for (char c : entrada) {
+            if (c < '0' || c > '9') {
+                esNumero = false;
+                break;
+            }
+        }
+if (!esNumero) {
+            cout << "Entrada invalida. Debes ingresar solo números.\n";
+            continue;
+        }
+                opcion = stoi(entrada);
+
         if (opcion < 1 || opcion > 3) {
-            cout << "Opcion invalida. Intenta de nuevo.\n";
+            cout << "Opcion invalida. Intenta de nuevo con 1 2 3.\n";
         }
     } while (opcion < 1 || opcion > 3);
 
@@ -461,6 +474,8 @@ bool jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNi
 
         return true;  //  Pasó el nivel
     } else {
+                cout << "Opción incorrecta. ¡Debes intentarlo de nuevo!\n";
+
         return false; //  Repetir nivel
 }
 }
@@ -499,6 +514,16 @@ void intentarJugarAventura(const Aventura& aventura, int indiceAventura, const C
 }
 void introduccionJuego() {
     cout << "Antes de comenzar, dime tu nombre: ";
-    cin >> nombreJugador;
-    cout << "\nMuy bien, " << nombreJugador << ". Preparate para tu destino...\n";
+   do{
+     cin >> nombreJugador;
+     bool soloLetras = true;
+     for (char c : nombreJugador){
+        if (c >= '0' && c <= '9'){
+            soloLetras = false;
+            break;
+        }
+     }
+     if (soloLetras) break;
+     else cout << "El nombre no puede contener numeros. Intenta de nuevo: ";
+} while (true);
 }
