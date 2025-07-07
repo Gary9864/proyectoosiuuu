@@ -12,6 +12,7 @@ string nombreJugador;
 // Aventuras definidas
 
 //aventura uno
+
 Aventura nerysia = {
     "Nerysia (Mundo de Agua)",
     
@@ -236,7 +237,6 @@ void minijuegoMemoria() {
             visible[f1][c1] = '*';
             visible[f2][c2] = '*';
         }
-
     } while (true);
 
     cout << "Minijuego terminado.\n";
@@ -397,7 +397,7 @@ string minijuegoDueloSimple() {
         return "Cristal del Olvido";
     } else {
         cout << "\nHas sido derrotado. El poder del Olvido te consume.\n";
-        return "";
+        return"";
 }
 }
 // Configuraciones de minijuegos para cada aventura
