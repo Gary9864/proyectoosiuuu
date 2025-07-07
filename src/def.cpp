@@ -3,15 +3,15 @@
 #include <fstream>
 #include <conio.h>
 
-// Variables globales
+// Global variables
 bool aventurasJugadas[3] = {false, false, false};
 string premiosJugador[20];
 int cantidadPremios = 0;
 string nombreJugador;
 
-// Aventuras definidas
+// Defined adventures
 
-//aventura uno
+//adventure one
 
 Aventura nerysia = {
    "Nerysia (Water World)",
@@ -65,7 +65,7 @@ Aventura nerysia = {
 };
 
 
-//aventura dos
+//adventure two
 Aventura infernum = {
     "Infernum (Mundo de Fuego)",
     {
@@ -145,15 +145,15 @@ Aventura thornia = {//declaramos el la aventura a la que vamos a añadirle datos
 };
 
 
-// Funciones
+// Functions
 
-//agrega premio segun gane
+//add prize if won
 void agregarPremio(string premio) {
     if (cantidadPremios < 20) {//si la cantidad es menor a 20 premios
         premiosJugador[cantidadPremios++] = premio; //se guarda en el arreglo sumando los premios
     }
 }
-//muestra los premios que ha obtenido
+//display obtained prizes
 void mostrarPremios() {
     cout << "\n--- Premios obtenidos ---\n";
     if (cantidadPremios == 0) {//si la cantidad de premios es igual a cero muestra el mensaje
@@ -165,13 +165,13 @@ void mostrarPremios() {
     }
     cout << endl;
 }
-//guardar progresoo
+//save progress
 void guardarProgreso() {
     ofstream archivo("src./progreso.txt");
     if (archivo.is_open()) {
         archivo << nombreJugador << endl;
         
-        // Contar cuántas aventuras jugó
+        // Count played adventures
         int totalAventuras = 0;
         for (int i = 0; i < 3; i++) {
             if (aventurasJugadas[i]) {
@@ -180,12 +180,12 @@ void guardarProgreso() {
         }
         archivo << totalAventuras << endl;
 
-        // Guardar nombres de aventuras jugadas
+        // Save adventure names
         if (aventurasJugadas[0]) archivo << "Nerysia (Mundo de Agua)" << endl;
         if (aventurasJugadas[1]) archivo << "Infernum (Mundo de Fuego)" << endl;
         if (aventurasJugadas[2]) archivo << "thornia (El mundo olvidado)" << endl;
 
-        // Guardar premios
+        // Save prizes
         archivo << cantidadPremios << endl;
         for (int i = 0; i < cantidadPremios; i++) {
             archivo << premiosJugador[i] << endl;
@@ -196,7 +196,7 @@ void guardarProgreso() {
     } else {
         cout << "No se pudo abrir el archivo para guardar.\n";
     }
-}//mostrar progreso
+}//show progress
 void mostrarProgreso() {
     ifstream archivo("src/progreso.txt");
     if (archivo.is_open()) {
@@ -233,17 +233,17 @@ void mostrarProgreso() {
     }
 }
 
-//añadiendo minijuegos mamalones
-//minijuego 1 uno 
+//adding cool minigames
+//minigame 1 
 
 
-//minijuego 2 
+//minigame 2 
 
-//minijeugo  3 q dislexia dios mio
+//minigame 3
 
 
 
-//minijuego 4
+//minigame 4
 
 
 
@@ -298,7 +298,7 @@ string minijuegoDuelo() {
         }
     }
 }
-//minijuego neryrisia para nivel 2
+//Minigame Nerysia for level 2
 
 void minijuegoPesca() {
     int x = rand() % 3;
@@ -363,9 +363,9 @@ void minijuegoPesca() {
 
 
 
-// Minijuego Nerysia para nivel 4
+// Minigame Nerysia for level 4
 void minijuegoObjetosPerdidos() {
-    char objetos[5] = {'F', 'R', 'F', 'L', 'T'}; // 'F' se repite
+    char objetos[5] = {'F', 'R', 'F', 'L', 'T'}; // 'F' is repeated
     char respuesta;
 
     cout << "\n--- Minijuego: Objetos Perdidos ---\n";
@@ -377,9 +377,9 @@ void minijuegoObjetosPerdidos() {
     while (!correcto) {
         cin >> respuesta;
 
-        // Validar si es letra
+        // Validate if it's a letter
         if ((respuesta >= 'A' && respuesta <= 'Z') || (respuesta >= 'a' && respuesta <= 'z')) {
-            // Verificar si es la correcta
+            // Check if it's the correct one
             if (respuesta == 'F' || respuesta == 'f') {
                 correcto = true;
             } else {
@@ -390,13 +390,13 @@ void minijuegoObjetosPerdidos() {
         }
     }
 
-    // Cuando sale del ciclo, significa que ya dio la correcta
+    // If we exit the loop, it means the correct answer was given
     cout << "¡Correcto! El objeto duplicado era F.\n";
     cout << "Minijuego terminado.\n";
 }
 
 void abrirCofre() {
-    const int clave[3] = {3, 1, 5}; // combinación secreta
+    const int clave[3] = {3, 1, 5}; // secret combination
     int intento[3];
     bool abierto = false;
 
@@ -406,11 +406,11 @@ void abrirCofre() {
     cout << "Buena suerte, valiente jugador.\n";
 
     while (!abierto) {
-        // --- Entrada del jugador ---
+        // Player input
         cout << "Introduce tu intento (3 números entre 0 y 9): ";
         cin >> intento[0] >> intento[1] >> intento[2];
 
-        // Validación de entrada
+        // Input validation
         while (intento[0] < 0 || intento[0] > 9 ||
                intento[1] < 0 || intento[1] > 9 ||
                intento[2] < 0 || intento[2] > 9) {
@@ -419,13 +419,13 @@ void abrirCofre() {
             cin >> intento[0] >> intento[1] >> intento[2];
         }
 
-        // --- Evaluación del intento ---
+        // Attempt evaluation
         int correctos = 0;
         int desordenados = 0;
         bool usadoClave[3] = {false, false, false};
         bool usadoIntento[3] = {false, false, false};
 
-        // Comparar en posición exacta
+        // Check correct position
         for (int i = 0; i < 3; i++) {
             if (intento[i] == clave[i]) {
                 correctos++;
@@ -434,7 +434,7 @@ void abrirCofre() {
             }
         }
 
-        // Comparar en posiciones diferentes
+        // Check correct numbers in different positions
         for (int i = 0; i < 3; i++) {
             if (!usadoIntento[i]) {
                 for (int j = 0; j < 3; j++) {
@@ -447,7 +447,7 @@ void abrirCofre() {
             }
         }
 
-        // --- Resultado del intento ---
+        // Attempt result
         if (correctos == 3) {
             cout << "\nPerfecto has adivinado la combinación perfecta.\n";
             cout << "El cofre se abre y revela un objeto en el fondo.\n";
@@ -464,7 +464,7 @@ void abrirCofre() {
 }
 void elegirPuerta() {
     int eleccion;
-    const int puertaCorrecta = 2; // esta es la puerta correcta
+    const int puertaCorrecta = 2; // this is the correct door
     bool paso = false;
 
     cout << "================ PUERTAS DEL DESTINO ================\n";
@@ -476,13 +476,13 @@ void elegirPuerta() {
         cout << "Elige una puerta (1, 2 o 3): ";
         cin >> eleccion;
 
-        // Validación de entrada
+        // Input validation
         while (eleccion < 1 || eleccion > 3) {
             cout << "Esa no es una puerta válida. Intenta con 1, 2 o 3: ";
             cin >> eleccion;
         }
 
-        // Evaluar elección
+        // Evaluate choice
         if (eleccion == puertaCorrecta) {
             cout << "\n Correcto la puerta se abre con un chirrillo antiguo...\n";
             cout << "Pasas al siguiente nivel del misterio. \n";
@@ -497,18 +497,18 @@ void elegirPuerta() {
 }
 
 
-// Configuraciones de minijuegos para cada aventura
+// Mini-game configurations for each adventure
 ConfigMinijuegos obtenerConfigNerysia() {
     return ConfigMinijuegos{
-        {false, true, false, true, false}, // niveles con minijuego
-        {0, 7, 0, 6, 0}                   // tipo de minijuego: 1 = Tesoro, 3 = Contar
+        {false, true, false, true, false}, // levels with mini-game
+        {0, 7, 0, 6, 0}                   // type of mini-game: 1 = Treasure, 3 = Count
     };
 }
 
 ConfigMinijuegos obtenerConfigInfernum() {
     return ConfigMinijuegos{
         {true, false, false, true, false},
-        {2, 0, 0, 4, 0}  // 2 = Simon, 4 = otro
+        {2, 0, 0, 4, 0}  // 
     };
 }
 
@@ -519,7 +519,7 @@ ConfigMinijuegos obtenerConfigThornia() {
     };
 }
 
-//jugar nivel de aventura
+//Play adventure level
 bool jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNivel) {
     cout << "\nSituacion: " << nivel.situacion << "\n";
     for (int i = 0; i < 3; i++) {
@@ -567,28 +567,27 @@ if (!esNumero) {
             }
         }
         
-        // Ahora mostrar y agregar premio
+        // Now show and add prize
         cout << "¡Ganaste el premio: " << nivel.premio << "!\n";
         agregarPremio(nivel.premio);
 
-        return true;  //  Pasó el nivel
+        return true;  //  Level passed
     } else {
                 cout << "Opción incorrecta. ¡Debes intentarlo de nuevo!\n";
 
-        return false; //  Repetir nivel
+        return false; //  Repeat level
 }
 }
-//funcion de jugar aventura 
+//Function to play adventure
 void jugarAventura(const Aventura& aventura, const ConfigMinijuegos& config) {
     cout << "\n--- Bienvenido a " << aventura.nombre << " ---\n";
-    for (int i = 0; i < 5; i++) { //recorremos el arreglo de la funcion 
+    for (int i = 0; i < 5; i++) { //we loop through the array of the function 
         cout << "\n--- Nivel " << i + 1 << " ---";
         bool pasoNivel = false;
         do {
             pasoNivel = jugarNivel(aventura.niveles[i], config, i);
-        } while (!pasoNivel); // 🔁 Repite hasta que el jugador acierte
-       // jugarNivel(aventura.niveles[i]);
-      // jugarNivel(aventura.niveles[i], config, i); // ✅ Pasas config y el índice actual
+        } while (!pasoNivel); //  Repeat until the player succeeds
+       // jugarNivel(aventura.niveles[i], config, i); // You pass config and the current index
 
       
     }
@@ -596,7 +595,7 @@ void jugarAventura(const Aventura& aventura, const ConfigMinijuegos& config) {
     
 }
 
-//ConfigMinijuegos config;  // variable global en def.cpp
+//ConfigMinijuegos config;  // global variable in def.cpp
 
 void intentarJugarAventura(const Aventura& aventura, int indiceAventura, const ConfigMinijuegos& config) {
     if (indiceAventura < 0 || indiceAventura >= 3) {

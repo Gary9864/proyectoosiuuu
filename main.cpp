@@ -18,7 +18,8 @@ int main() {
         cout << "Opcion: ";
         cin >> entrada;
 
- // Validar que la entrada tenga solo dígitos
+ // Validate that the input contains only digits
+
         bool esNumero = true;
         for (char c : entrada) {
             if (c < '0' || c > '9') {
@@ -32,7 +33,8 @@ int main() {
             continue;
         }
 
-        opcion = stoi(entrada); // Convertir solo si fue validado
+        opcion = stoi(entrada); // Convert only if it was validated
+
         
         switch (opcion) {
             case 1:
@@ -75,7 +77,8 @@ int main() {
         cout << "Opcion: ";
         cin >> entrada;
 
-        // Validar que sea un número entero válido
+        // Validate that it is a valid integer number
+
         bool esNumero = true;
         for (char c : entrada) {
             if (c < '0' || c > '9') {
