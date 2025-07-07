@@ -95,7 +95,7 @@ Aventura thornia = {//declaramos el la aventura a la que vamos a añadirle datos
             {"Leer en voz alta la inscripción del libro desconocido. ", "La sala tiembla. El guardián parece debilitado y tambalea, pero sigue en pie."},
             {"Cubrirte con la capucha vieja.", "La capucha se quema al contacto con la energía del guardián y quedas desprotegido."}
           },
-          "", 1 }
+          "Totem de inmortalidad", 1 }
 }
 };
 
@@ -361,44 +361,46 @@ void minijuegoContar() {
 
     cout << "Minijuego terminado.\n";
 }
-string minijuegoDueloSimple() {
-    int aciertos = 0;
-    int fallos = 0;
-    char runa;
-    char tecla;
+string minijuegoDuelo() {
+    char runas[5] = {'A', 'S', 'D', 'F', 'J'};
+    int posicion = 0;
 
-    cout << "\n--- Minijuego: Duelo de Runas (Simple) ---\n";
-    cout << "Instrucciones: aparecerá una letra (A, S o D) y debes presionar esa misma tecla.\n";
-    cout << "3 aciertos = victoria, 2 fallos = derrota.\n";
+    cout << "\n--- Minijuego: Duelo de Runas ---\n";
+    cout << "Instrucciones: se mostrará una letra (A, S, D, F o J).\n";
+    cout << "Presiona esa tecla. 4 aciertos = victoria, 2 fallos = reinicio.\n";
 
-    while (aciertos < 3 && fallos < 2) {
-        // Mostramos manualmente una runa
-        cout << "\nElige la runa (A, S o D): ";
-        cin >> runa;
+    while (true) { // Repetir hasta que gane
+        int aciertos = 0;
+        int fallos = 0;
+        posicion = 0;
 
-        cout << "Presiona la tecla correcta: ";
-        tecla = _getch(); // El jugador presiona una tecla
+        while (aciertos < 4 && fallos < 2) {
+            char runa = runas[posicion];
+            posicion = (posicion + 1) % 5;
 
-        cout << "\nTú presionaste: " << tecla << endl;
+            cout << "\nRuna enemiga: " << runa << "\n";
+            cout << "Presiona la tecla correcta: ";
+            char tecla = _getch();
+            cout << tecla << endl;
 
-        if (tecla == runa) {
-            cout << "¡Correcto! Bloqueaste la runa.\n";
-            aciertos++;
-        } else {
-            cout << "¡Fallaste! El ataque te daña.\n";
-            fallos++;
+            if (tecla == runa || tecla == runa + 32) {
+                cout << "¡Correcto!\n";
+                aciertos++;
+            } else {
+                cout << "¡Fallaste!\n";
+                fallos++;
+            }
+
+            cout << "Aciertos: " << aciertos << " | Fallos: " << fallos << "\n";
         }
 
-        cout << "Aciertos: " << aciertos << " | Fallos: " << fallos << "\n";
+        if (aciertos == 4) {
+            cout << "\n ¡Has ganado el duelo de runas!\n";
+            return "Amuleto de Precisión";
+        } else {
+            cout << "\n Has fallado... el duelo comienza de nuevo.\n";
+        }
     }
-
-    if (aciertos == 3) {
-        cout << "\nHas vencido al Guardián del Olvido.\n";
-        return "Cristal del Olvido";
-    } else {
-        cout << "\nHas sido derrotado. El poder del Olvido te consume.\n";
-        return"";
-}
 }
 // Configuraciones de minijuegos para cada aventura
 ConfigMinijuegos obtenerConfigNerysia() {
@@ -425,41 +427,42 @@ ConfigMinijuegos obtenerConfigThornia() {
 //jugar nivel de aventura
 bool jugarNivel(const Nivel& nivel, const ConfigMinijuegos& config, int indiceNivel) {
     cout << "\nSituacion: " << nivel.situacion << "\n";
-    for (int i = 0; i < 3; i++) { //si los niveles son menores a 3
-        cout << i + 1 << ". " << nivel.decisiones[i].texto << "\n"; //manda el arreglo de decisiones
+    for (int i = 0; i < 3; i++) {
+        cout << i + 1 << ". " << nivel.decisiones[i].texto << "\n";
     }
 
-    int opcion;//declaramos un entero para la opcion de las decisiones
+    int opcion;
     do {
         cout << "Elige una opcion: ";
         cin >> opcion;
-        if (opcion < 1 || opcion > 3) { //una condicional que elija solamente entre la opcion  1 a 3
+        if (opcion < 1 || opcion > 3) {
             cout << "Opcion invalida. Intenta de nuevo.\n";
         }
-    } while (opcion < 1 || opcion > 3); //todo eso lo hara mientras sean esas opciones
+    } while (opcion < 1 || opcion > 3);
 
-    cout << "\n" << nivel.decisiones[opcion - 1].consecuencia << "\n"; //mostramos el arreglo de opciones -1 y la consecuencia que es correspndiente
+    cout << "\n" << nivel.decisiones[opcion - 1].consecuencia << "\n";
 
-    if ((opcion - 1) == nivel.opcionGanadora) { //si la opcion que eligio es igual a la opcion ganadora muestra el mensaje
-        cout << "¡Ganaste el premio: " << nivel.premio << "!\n";
-        agregarPremio(nivel.premio); // agregamos premio al arreglo
+    if ((opcion - 1) == nivel.opcionGanadora) {
+        // Primero jugar minijuego si existe
         if (config.activar[indiceNivel]) {
             switch (config.tipo[indiceNivel]) {
                 case 1: minijuegoTesoro(); break;
                 case 2: minijuegoSimon(); break;
                 case 3: minijuegoContar(); break;
                 case 4: minijuegoMemoria(); break;
-                case 5: minijuegoDueloSimple(); break;
-                default: break; // ningún minijuego
+                case 5: minijuegoDuelo(); break;
+                default: break;
             }
         }
-                return true;  // ✅ Pasó el nivel
+        
+        // Ahora mostrar y agregar premio
+        cout << "¡Ganaste el premio: " << nivel.premio << "!\n";
+        agregarPremio(nivel.premio);
 
+        return true;  //  Pasó el nivel
     } else {
-        cout << "Opción incorrecta. ¡Debes intentarlo de nuevo!\n";
-                return false; // ❌ Repetir nivel
-
-    }
+        return false; //  Repetir nivel
+}
 }
 //funcion de jugar aventura 
 void jugarAventura(const Aventura& aventura, const ConfigMinijuegos& config) {

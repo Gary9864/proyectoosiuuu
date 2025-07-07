@@ -65,7 +65,7 @@ void minijuegoMemoria();
 void minijuegoTesoro();
 void minijuegoSimon();
 void minijuegoContar();
-string minijuegoDueloSimple();
+string minijuegoDuelo();
 
 // Declaración de aventuras
 extern Aventura nerysia;
