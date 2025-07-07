@@ -621,6 +621,39 @@ void abrirCofre() {
         cout << "----------------------------------------\n";
     }
 }
+void elegirPuerta() {
+    int eleccion;
+    const int puertaCorrecta = 2; // esta es la puerta correcta
+    bool paso = false;
+
+    cout << "================ PUERTAS DEL DESTINO ================\n";
+    cout << "Estás frente a 3 puertas misteriosas...\n";
+    cout << "Solo una de ellas te dejará continuar.\n";
+    cout << "Elige sabiamente (puerta 1, 2 o 3).\n\n";
+
+    while (!paso) {
+        cout << "Elige una puerta (1, 2 o 3): ";
+        cin >> eleccion;
+
+        // Validación de entrada
+        while (eleccion < 1 || eleccion > 3) {
+            cout << "Esa no es una puerta válida. Intenta con 1, 2 o 3: ";
+            cin >> eleccion;
+        }
+
+        // Evaluar elección
+        if (eleccion == puertaCorrecta) {
+            cout << "\n Correcto la puerta se abre con un chirrillo antiguo...\n";
+            cout << "Pasas al siguiente nivel del misterio. \n";
+            paso = true;
+        } else {
+            cout << "\nEsa puerta está sellada. Un murmullo oscuro te detiene.\n";
+            cout << "Intenta con otra puerta...\n";
+        }
+
+        cout << "-----------------------------------------------------\n";
+    }
+}
 
 
 // Configuraciones de minijuegos para cada aventura
@@ -640,8 +673,8 @@ ConfigMinijuegos obtenerConfigInfernum() {
 
 ConfigMinijuegos obtenerConfigThornia() {
     return ConfigMinijuegos{
-        {false, true, false, false, true},
-        {0, 8, 0, 0, 5}
+        {false, true, true, false, true},
+        {0, 8, 9, 0, 5}
     };
 }
 
@@ -688,6 +721,7 @@ if (!esNumero) {
                 case 6: minijuegoPesca(); break;
                 case 7: minijuegoObjetosPerdidos(); break;
                 case 8: abrirCofre(); break;
+                case 9: elegirPuerta(); break;
                 default: break;
             }
         }
