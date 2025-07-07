@@ -396,7 +396,7 @@ string minijuegoDuelo() {
 
         if (aciertos == 4) {
             cout << "\n ¡Has ganado el duelo de runas!\n";
-            return "Amuleto de Precisión";
+            return "Totem de inmortalidad";
         } else {
             cout << "\n Has fallado... el duelo comienza de nuevo.\n";
         }
