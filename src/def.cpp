@@ -126,11 +126,11 @@ Aventura thornia = {//declaramos el la aventura a la que vamos a añadirle datos
         { "Al descender encuentras una sala con 3 estatuas encapuchadas con diferentes simbolos.",
           { {"Tocar primer estatua con un simbolo cuadrado. ", "Activas una trampa y no escapaste a tiempo. "},
             {"Tocar segunda estatua con un simbolo circular. ", "Aparece una neblina y terminas inconciente. "},
-            {"Tocar tercera estatua con simbolo triangular. ", "La estatua se desplaza y abre un camino atras de ella y te llevas su capucha. "}
+            {"Tocar tercera estatua con simbolo triangular. ", "La estatua se desplaza, tomas su capucha y se abre un camino con 3 puertas atras de ella. "}
           },
           "Capucha vieja. ", 2 },
         { "Sigues el camino y te encuentras una sala oscura llena de armas con escombros y simbolos en las paredes. ",
-          { {"Investiga los escombros. ", "Al acercarte a los escombros encuentras un libro y se activan las runas con la capucha apareciendo 3 puertas . "},
+          { {"Investiga los escombros. ", "Al acercarte a los escombros encuentras un libro y se activan las runas con la capucha apareciendo una puerta . "},
             {"Vuelves a la sala anterior. ", "No logras nada. "},
             {"Investiga las armas. ", "Te tropiezas y te atraviesa una espada de forma humillante. "}
           },
