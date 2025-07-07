@@ -379,9 +379,19 @@ string minijuegoDuelo() {
             posicion = (posicion + 1) % 5;
 
             cout << "\nRuna enemiga: " << runa << "\n";
-            cout << "Presiona la tecla correcta: ";
-            char tecla = _getch();
-            cout << tecla << endl;
+            char tecla;
+             // VALIDACIÓN: repetir hasta que no meta un número
+            while (true) {
+                cout << "Presiona la tecla correcta: ";
+                tecla = _getch();
+                cout << tecla << endl;
+
+                if (tecla >= '0' && tecla <= '9') {
+                    cout << "No puedes usar números. Intenta de nuevo.\n";
+                } else {
+                    break;  // Sale del while si no es número
+                }
+            }
 
             if (tecla == runa || tecla == runa + 32) {
                 cout << "¡Correcto!\n";
