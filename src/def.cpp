@@ -130,7 +130,7 @@ Aventura thornia = {//declaramos el la aventura a la que vamos a añadirle datos
           },
           "Capucha vieja. ", 2 },
         { "Sigues el camino y te encuentras una sala oscura llena de armas con escombros y simbolos en las paredes. ",
-          { {"Investiga los escombros. ", "Al acercarte a los escombros encuentras un libro y se activan las runas con la capucha apareciendo una puerta . "},
+          { {"Investiga los escombros. ", "Al acercarte a los escombros encuentras un libro y se activan las runas con la capucha apareciendo 3 puertas . "},
             {"Vuelves a la sala anterior. ", "No logras nada. "},
             {"Investiga las armas. ", "Te tropiezas y te atraviesa una espada de forma humillante. "}
           },
@@ -562,7 +562,7 @@ void abrirCofre() {
     cout << "====== DESAFÍO DEL COFRE SELLADO ======\n";
     cout << "Encuentra la combinación secreta de 3 dígitos (0-9).\n";
     cout << "Recibirás pistas después de cada intento.\n";
-    cout << "Buena suerte, valiente buscador de tesoros.\n\n";
+    cout << "Buena suerte, valiente jugador.\n";
 
     while (!abierto) {
         // --- Entrada del jugador ---
@@ -608,8 +608,8 @@ void abrirCofre() {
 
         // --- Resultado del intento ---
         if (correctos == 3) {
-            cout << "\n¡Éxito! Has adivinado la combinación perfecta.\n";
-            cout << "✨ El cofre se abre y revela un brillo dorado lleno de riquezas. 💰\n";
+            cout << "\nPerfecto has adivinado la combinación perfecta.\n";
+            cout << "El cofre se abre y revela un objeto en el fondo.\n";
             abierto = true;
         } else {
             cout << "\nPistas del intento:\n";
