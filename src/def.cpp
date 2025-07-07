@@ -14,8 +14,53 @@ string nombreJugador;
 //aventura uno
 
 Aventura nerysia = {
-    "Nerysia (Mundo de Agua)",
-    
+   "Nerysia (Water World)",
+    {
+        // Level 1 – Coral Reef
+        { "The pufferfish have found their home destroyed. They are furious and are attacking the octopus village.\nWhat weapon do you recommend using?",
+          { 
+              {"Their spines", "The fish get confused and stop attacking for a moment."},
+              {"A sword", "The sword is useless underwater, you waste time."},
+              {"The octopus ink", "The ink blinds them and they manage to escape in time."}
+          },
+          "Ancient Ink", 1 },
+
+        // Level 2 – Eternal Algae Caves
+        { "As you move through a cave covered in glowing algae, you hear a hypnotic singing. You realize it comes from dark mermaids trying to distract you to steal your life energy.",
+          {
+              {"You follow the singing, maybe it leads to a clue", "You get hypnotized and lose energy."},
+              {"You cover your ears with algae", "You resist the song and move forward successfully."},
+              {"You throw a stone toward the sound to distract them", "You confuse them and manage to escape unseen."}
+          },
+          "Luminous Pearl", 2 },
+
+        // Level 3 – Abyssal Trench of Oblivion
+        { "You reach an area so deep that light disappears. You find an old fish trapped in a black coral cage begging for help.",
+          {
+              {"You free it without asking", "It was a trap, the fish betrays you."},
+              {"You ask questions before deciding", "The fish shows wisdom and gives you an ancient fragment."},
+              {"You ignore it and move on", "You feel guilty, but avoid trouble."}
+          },
+          "Ancient Coral Fragment", 2 },
+
+        // Level 4 – Fields of Wild Currents
+        { "A violent current pulls you, and you must choose which creature to ally with to help you swim safely.",
+          {
+              {"A giant squid", "It helps you, but demands a favor in return."},
+              {"A group of sea turtles", "They transport you calmly and safely."},
+              {"A very fast lone dolphin", "You arrive quickly but get separated from the group."}
+          },
+          "Current Amulet", 2 },
+
+        // Level 5 – The Palace of Corruption
+        { "You reach the heart of darkness: a gigantic creature made of oil and shadows is corrupting the water.\nHow do you decide to face it?",
+          {
+              {"You use a sacred pearl you found on the way", "The creature weakens and retreats."},
+              {"You summon all the creatures you helped before", "They fight with you and manage to contain it."},
+              {"You use your own life energy as a last resort", "The creature disappears, but you're left badly injured."}
+          },
+          "Heart of Nerysia", 1 }
+    }
     
 };
 
@@ -412,11 +457,110 @@ string minijuegoDuelo() {
         }
     }
 }
+//minijuego neryrisia para nivel 2
+
+void minijuegoPesca() {
+    int x = rand() % 3;
+    int y = rand() % 3;
+
+    int intentoX, intentoY;
+    string entrada;
+
+    cout << "\n--- Minijuego: Pesca en Aguas Cristalinas ---\n";
+    cout << "Adivina en qué punto (x, y) está el pez (valores entre 0 y 2):\n";
+
+    // Validar X
+    while (true) {
+        cout << "Ingresa coordenada X: ";
+        cin >> entrada;
+
+        bool esNumero = true;
+        for (char c : entrada) {
+            if (!isdigit(c)) {
+                esNumero = false;
+                break;
+            }
+        }
+
+        if (esNumero) {
+            intentoX = stoi(entrada);
+            if (intentoX >= 0 && intentoX <= 2) break;
+        }
+
+        cout << "Entrada inválida. Ingresa un número entre 0 y 2.\n";
+    }
+
+    // Validar Y
+    while (true) {
+        cout << "Ingresa coordenada Y: ";
+        cin >> entrada;
+
+        bool esNumero = true;
+        for (char c : entrada) {
+            if (!isdigit(c)) {
+                esNumero = false;
+                break;
+            }
+        }
+
+        if (esNumero) {
+            intentoY = stoi(entrada);
+            if (intentoY >= 0 && intentoY <= 2) break;
+        }
+
+        cout << "Entrada inválida. Ingresa un número entre 0 y 2.\n";
+    }
+
+    if (intentoX == x && intentoY == y) {
+        cout << "¡Pescaste al pez dorado!\n";
+    } else {
+        cout << "Nada aquí... El pez estaba en (" << x << ", " << y << ")\n";
+    }
+
+    cout << "Minijuego terminado.\n";
+}
+
+#include <iostream>
+using namespace std;
+
+// Minijuego Nerysia para nivel 4
+void minijuegoObjetosPerdidos() {
+    char objetos[5] = {'F', 'R', 'F', 'L', 'T'}; // 'F' se repite
+    char respuesta;
+
+    cout << "\n--- Minijuego: Objetos Perdidos ---\n";
+    cout << "Observa los objetos: ";
+    for (int i = 0; i < 5; i++) cout << objetos[i] << " ";
+    cout << "\nUno de ellos está repetido. ¿Cuál es? ";
+
+    bool correcto = false;
+    while (!correcto) {
+        cin >> respuesta;
+
+        // Validar si es letra
+        if ((respuesta >= 'A' && respuesta <= 'Z') || (respuesta >= 'a' && respuesta <= 'z')) {
+            // Verificar si es la correcta
+            if (respuesta == 'F' || respuesta == 'f') {
+                correcto = true;
+            } else {
+                cout << "Incorrecto. Intenta de nuevo: ";
+            }
+        } else {
+            cout << "Entrada inválida. Ingresa solo UNA letra (A-Z): ";
+        }
+    }
+
+    // Cuando sale del ciclo, significa que ya dio la correcta
+    cout << "¡Correcto! El objeto duplicado era F.\n";
+    cout << "Minijuego terminado.\n";
+}
+
+
 // Configuraciones de minijuegos para cada aventura
 ConfigMinijuegos obtenerConfigNerysia() {
     return ConfigMinijuegos{
-        {false, true, false, false, true}, // niveles con minijuego
-        {1, 0, 0, 0, 3}                   // tipo de minijuego: 1 = Tesoro, 3 = Contar
+        {false, true, false, true, false}, // niveles con minijuego
+        {0, 7, 0, 6, 0}                   // tipo de minijuego: 1 = Tesoro, 3 = Contar
     };
 }
 
@@ -474,6 +618,8 @@ if (!esNumero) {
                 case 3: minijuegoContar(); break;
                 case 4: minijuegoMemoria(); break;
                 case 5: minijuegoDuelo(); break;
+                case 6: minijuegoPesca(); break;
+                case 7: minijuegoObjetosPerdidos(); break;
                 default: break;
             }
         }
